@@ -1,126 +1,1338 @@
 <!doctype html>
 <html lang="uk">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Discover Yourself</title>
-<style>
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#f6f7fb;color:#0f172a}
-  .wrap{max-width:1000px;margin:0 auto;padding:40px}
-  h1{font-size:52px;margin:0 0 24px}
-  .card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
-  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .pill{background:#eaf2ff;border-radius:999px;padding:10px 14px;font-weight:700}
-  .hint{color:#64748b;margin:10px 0 16px;font-weight:600}
-  button{width:100%;text-align:left;padding:14px;border-radius:12px;border:1px solid #e5e7eb;background:#f1f5f9;cursor:pointer;font-size:16px;line-height:1.25}
-  button:hover{background:#e2e8f0}
-  .cta{background:#0b1220;color:#fff;border:0;margin-top:18px;text-align:center;font-weight:800}
-</style>
-<link rel="manifest" href="./manifest.webmanifest">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Discover Yourself</title>
+
+  <!-- PWA (у тебе вже є manifest + іконки в репо) -->
+  <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0b1220">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="apple-touch-icon" href="/icon-192.png">
+
+  <style>
+    :root{
+      --bg:#fbf7ff;
+      --card:#ffffff;
+      --ink:#1b1530;
+      --muted:#6b5d86;
+      --violet:#cdb7ff;       /* світло-фіолетовий */
+      --violet-2:#efe8ff;     /* дуже світлий */
+      --gold:#d6b25a;         /* золото */
+      --gold-2:#f3e7c6;
+      --danger:#c43d4b;
+      --ok:#2e7d32;
+      --shadow: 0 10px 30px rgba(20,10,40,.10);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(205,183,255,.45), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(214,178,90,.22), transparent 55%),
+        var(--bg);
+      min-height:100vh;
+    }
+
+    header{
+      padding:18px 16px 8px;
+      max-width:980px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      user-select:none;
+    }
+    .logoDot{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(205,183,255,.95), rgba(214,178,90,.35));
+      border: 1px solid rgba(214,178,90,.45);
+      box-shadow: 0 8px 18px rgba(20,10,40,.10);
+      display:grid;place-items:center;
+      font-weight:800;
+      color:#20123a;
+      letter-spacing:.5px;
+    }
+    .brand h1{
+      font-size:18px;
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .brand small{
+      color:var(--muted);
+      display:block;
+      margin-top:2px;
+      font-size:12px;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:10px 16px 40px;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:12px 0 14px;
+    }
+
+    .tab{
+      border:1px solid rgba(27,21,48,.12);
+      background: rgba(255,255,255,.55);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      color:var(--muted);
+      transition:.15s ease;
+      display:flex;align-items:center;gap:8px;
+      box-shadow: 0 6px 16px rgba(20,10,40,.05);
+    }
+    .tab.active{
+      color:var(--ink);
+      background: linear-gradient(180deg, rgba(205,183,255,.35), rgba(255,255,255,.9));
+      border-color: rgba(214,178,90,.45);
+      box-shadow: 0 10px 22px rgba(20,10,40,.09);
+    }
+
+    .card{
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(27,21,48,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+
+    .row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:stretch;
+    }
+    .col{flex:1 1 320px}
+
+    .title{
+      margin:0 0 6px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .hint{color:var(--muted); margin:0 0 10px; line-height:1.45}
+
+    .q{
+      margin:14px 0;
+      padding:14px;
+      border-radius:16px;
+      background: linear-gradient(180deg, rgba(239,232,255,.85), rgba(255,255,255,.9));
+      border:1px solid rgba(205,183,255,.40);
+    }
+
+    .q h3{
+      margin:0 0 10px;
+      font-size:15px;
+      line-height:1.35;
+    }
+
+    .opts{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .opt{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(27,21,48,.12);
+      background: rgba(255,255,255,.75);
+      cursor:pointer;
+      transition:.12s ease;
+    }
+    .opt:hover{
+      border-color: rgba(214,178,90,.55);
+      box-shadow: 0 10px 18px rgba(20,10,40,.06);
+      transform: translateY(-1px);
+    }
+
+    .badge{
+      min-width:28px;height:28px;border-radius:10px;
+      display:grid;place-items:center;
+      font-weight:800;
+      background: rgba(205,183,255,.55);
+      border:1px solid rgba(214,178,90,.40);
+      color:#20123a;
+    }
+
+    .opt.selected{
+      border-color: rgba(214,178,90,.75);
+      background: linear-gradient(180deg, rgba(205,183,255,.30), rgba(255,255,255,.92));
+      box-shadow: 0 14px 24px rgba(20,10,40,.09);
+      position:relative;
+    }
+    .opt.selected::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:14px;
+      box-shadow: 0 0 0 2px rgba(214,178,90,.35), 0 0 18px rgba(214,178,90,.18);
+      pointer-events:none;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    button{
+      border:0;
+      padding:12px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:700;
+      letter-spacing:.2px;
+      transition:.12s ease;
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(205,183,255,.95), rgba(214,178,90,.35));
+      color:#20123a;
+      border:1px solid rgba(214,178,90,.55);
+      box-shadow: 0 12px 22px rgba(20,10,40,.10);
+    }
+    .btnPrimary:hover{ transform: translateY(-1px); }
+    .btnGhost{
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(27,21,48,.16);
+      color: var(--muted);
+    }
+    .btnDanger{
+      background: rgba(196,61,75,.10);
+      border:1px solid rgba(196,61,75,.30);
+      color: var(--danger);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(239,232,255,.9);
+      border:1px solid rgba(205,183,255,.5);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .resultBox{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(214,178,90,.45);
+      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(239,232,255,.85));
+    }
+
+    .resTitle{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+
+    .resText{
+      margin:0;
+      line-height:1.55;
+      color: #2a2145;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 860px){
+      .grid2{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .label{
+      font-weight:700;
+      margin:10px 0 6px;
+    }
+
+    input[type="range"]{ width:100% }
+    input[type="text"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(27,21,48,.16);
+      outline:none;
+      background: rgba(255,255,255,.85);
+    }
+
+    .mini{
+      font-size:12px;color:var(--muted);
+    }
+
+    canvas{
+      width:100%;
+      height:180px;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(27,21,48,.12);
+      border-radius: 16px;
+    }
+
+    .list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .item{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(27,21,48,.12);
+      background: rgba(255,255,255,.70);
+    }
+
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      padding: 2px 7px;
+      border-radius: 8px;
+      border:1px solid rgba(27,21,48,.18);
+      background: rgba(255,255,255,.75);
+      color: var(--muted);
+      font-size:12px;
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
-  <h1>Discover Yourself</h1>
-  <div class="card">
-    <div class="top">
-      <div class="pill" id="status">Готово ✅</div>
-      <div class="pill" id="counter">Питання: —</div>
+<header>
+  <div class="brand">
+    <div class="logoDot">DY</div>
+    <div>
+      <h1>Discover Yourself</h1>
+      <small>тест стратегій + щоденний check-in (7 днів)</small>
     </div>
-    <div id="app"></div>
   </div>
+  <div class="pill" id="statusPill">Готово ✅</div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" data-tab="test">Тест</div>
+    <div class="tab" data-tab="result">Результат</div>
+    <div class="tab" data-tab="daily">Щодня</div>
+    <div class="tab" data-tab="dynamics">Динаміка 7 днів</div>
+  </div>
+
+  <div id="viewTest" class="card"></div>
+  <div id="viewResult" class="card" style="display:none"></div>
+  <div id="viewDaily" class="card" style="display:none"></div>
+  <div id="viewDynamics" class="card" style="display:none"></div>
 </div>
 
 <script>
-async function main(){
-  const res = await fetch("data.json",{cache:"no-store"});
-  const data = await res.json();
+/** =========================
+ *  DATA MODEL (8 strategies)
+ *  ========================= */
+const STRATEGIES = [
+  {
+    key:"contact",
+    name:"Контакт / Тривожна близькість",
+    wow: `Ти дуже тонко відчуваєш зміни в тоні, паузи, «охолодження». У моменти невизначеності всередині може підніматися тривога: «а раптом я щось зіпсувала?» і з’являється бажання повернути тепло.
+<br><br><b>Приклади:</b> після повідомлення ти перечитуєш його кілька разів; після розмови прокручуєш діалог і шукаєш «де була помилка».
+<br><br><b>Сильна сторона:</b> емпатія й здатність будувати зв’язок.
+<br><b>Ризик:</b> надвкладення й залежність від реакції.
+<br><b>Мікро-крок:</b> пауза 20 хв перед «ще одним уточненням».`
+  },
+  {
+    key:"control",
+    name:"Контроль / Опора через структуру",
+    wow: `Коли стає тривожно, ти береш кермо: плануєш, уточнюєш, «дотискаєш» ясність. Так ти повертаєш відчуття безпеки.
+<br><br><b>Приклади:</b> якщо тебе перебили — хочеться довести думку до кінця; якщо щось незрозуміло — збираєш факти і будуєш план.
+<br><br><b>Сильна сторона:</b> системність і відповідальність.
+<br><b>Ризик:</b> виснаження й жорсткість.
+<br><b>Мікро-крок:</b> делегуй одну дрібну річ або залиш одну невизначеність до завтра.`
+  },
+  {
+    key:"avoid",
+    name:"Уникнення / Захист тишею",
+    wow: `У напрузі ти ніби відходиш в тінь. Це спосіб не боліти й не відкриватися там, де небезпечно.
+<br><br><b>Приклади:</b> після критики хочеться «зникнути»; коли людина охолола — ти закриваєшся першою.
+<br><br><b>Сильна сторона:</b> самозбереження і обережність.
+<br><b>Ризик:</b> дистанція замість ясності.
+<br><b>Мікро-крок:</b> одна коротка фраза замість мовчання: «Мені важливо уточнити…».`
+  },
+  {
+    key:"rationalize",
+    name:"Раціоналізація / Вимкнути емоції",
+    wow: `Ти швидко переходиш у голову: логіка, аналіз, пояснення. Емоції приглушуються, бо так легше тримати себе.
+<br><br><b>Приклади:</b> кажеш собі «це дрібниці»; у конфлікті пояснюєш структуру, навіть якщо болить.
+<br><br><b>Сильна сторона:</b> ясність мислення у стресі.
+<br><b>Ризик:</b> відрив від себе і накопичення напруги.
+<br><b>Мікро-крок:</b> назви 1 емоцію словами без аналізу: «Я злюся / мені страшно / мені сумно».`
+  },
+  {
+    key:"overdo",
+    name:"Старання / Перфекціоністська компенсація",
+    wow: `Коли страшно помилитися або бути «недостатньою», ти піднімаєш планку і компенсуєш діями: робити більше, краще, швидше.
+<br><br><b>Приклади:</b> після помилки хочеться перевиконати; після похвали — тривога «а наступного разу?».
+<br><br><b>Сильна сторона:</b> результативність.
+<br><b>Ризик:</b> самокритика і вигорання.
+<br><b>Мікро-крок:</b> зроби «достатньо добре» (80%) в одній задачі.`
+  },
+  {
+    key:"distance",
+    name:"Дистанція / Відсікти, щоб не бути вразливою",
+    wow: `Коли відчувається холод або несправедливість, може піднятися внутрішня крига: ти віддаляєшся, інколи з знеціненням. Так повертається контроль і зменшується біль.
+<br><br><b>Приклади:</b> «це не ті люди»; «мені й не треба».
+<br><br><b>Сильна сторона:</b> сильні межі.
+<br><b>Ризик:</b> різкість і самотність.
+<br><b>Мікро-крок:</b> 1 уточнення замість відсічі: «Я правильно зрозуміла, що…?».`
+  },
+  {
+    key:"adapt",
+    name:"Адаптація / Бути зручною, щоб зберегти мир",
+    wow: `Ти чутлива до напруги і часто підлаштовуєшся, щоб не розгойдувати ситуацію. Це твій спосіб тримати систему стабільною.
+<br><br><b>Приклади:</b> згладжуєш конфлікт; стаєш «простішою», щоб тебе не відсунули.
+<br><br><b>Сильна сторона:</b> дипломатія і соціальний інтелект.
+<br><b>Ризик:</b> зрада себе і накопичена злість.
+<br><b>Мікро-крок:</b> одна маленька межа: «Мені так не підходить, давай інакше».`
+  },
+  {
+    key:"resource",
+    name:"Ресурс / Збалансований режим",
+    wow: `Ти вмієш бути в собі: відчувати, думати і діяти без крайнощів. Ти можеш і тримати межі, і залишатися в контакті.
+<br><br><b>Приклади:</b> не зникаєш, але й не доводиш «на силі»; говориш прямо без атаки.
+<br><br><b>Сильна сторона:</b> внутрішня опора.
+<br><b>Ризик:</b> рідко — «перетримати» інших у сильній емоції.
+<br><b>Мікро-крок:</b> зафіксуй, що дає ресурс (сон/тіло/люди/сенс) і повторюй це.`
+  },
+];
 
-  let scores = {};
-  Object.keys(data.strategies).forEach(k=>scores[k]=0);
+/** =========================
+ *  QUESTIONS (20)
+ *  Each option maps to strategy key.
+ *  NOTE: mapping is a best-practice logical mapping.
+ *  ========================= */
+const QUESTIONS = [
+  {
+    id:1,
+    text:"На зустрічі твою ідею перебивають і до неї не повертаються. Що ти відчуваєш і що з тобою відбувається всередині?",
+    options:[
+      {k:"A", t:"Думаю: «мабуть, сказала недостатньо цінне» і внутрішньо зменшуюсь", s:"contact"},
+      {k:"B", t:"Відчуваю напругу й починаю активніше “доводити” думку", s:"overdo"},
+      {k:"C", t:"Закриваюся і вирішую більше не ініціювати", s:"avoid"},
+      {k:"D", t:"З’являється холодне «це не ті люди» і я віддаляюсь", s:"distance"},
+      {k:"E", t:"Переходжу в логіку: пояснюю структурно, чому це важливо", s:"rationalize"},
+    ]
+  },
+  {
+    id:2,
+    text:"Людина, яка була теплою, раптом відповідає коротко і сухо. Що ти відчуваєш глибше за все?",
+    options:[
+      {k:"A", t:"Тривогу: «я щось зробила не так»", s:"contact"},
+      {k:"B", t:"Потребу швидко повернути контакт (написати ще/уточнити)", s:"contact"},
+      {k:"C", t:"Намір дистанціюватися першою, щоб не бути вразливою", s:"distance"},
+      {k:"D", t:"Раціоналізацію: «вона зайнята», і я ніби “вимикаюсь”", s:"rationalize"},
+      {k:"E", t:"Приховану злість/образу, що мене “відсунули”", s:"distance"},
+    ]
+  },
+  {
+    id:3,
+    text:"Тобі кажуть: «Ти могла б зробити краще». Що з’являється всередині перш за все?",
+    options:[
+      {k:"A", t:"Автоматична думка: «я помилилась» і треба виправити", s:"overdo"},
+      {k:"B", t:"Сором/стиснення, яке ще довго відлунює", s:"contact"},
+      {k:"C", t:"Внутрішній протест: «це несправедливо» (хочеться довести)", s:"control"},
+      {k:"D", t:"Режим “старатися ще більше”, щоб не повторилось", s:"overdo"},
+      {k:"E", t:"Холодний аналіз: що саме не так, без емоцій", s:"rationalize"},
+    ]
+  },
+  {
+    id:4,
+    text:"Ти помічаєш, що хтось “охолов”: інтонація інша, менше ініціативи. Що відбувається всередині?",
+    options:[
+      {k:"A", t:"Думка: «це через мене» і тривога зростає", s:"contact"},
+      {k:"B", t:"Хочу згладити і повернути тепло (стати “зручнішою”)", s:"adapt"},
+      {k:"C", t:"Я теж закриваюся — ніби ставлю щит", s:"avoid"},
+      {k:"D", t:"Кажу собі: «нічого страшного», і “відключаю” відчуття", s:"rationalize"},
+      {k:"E", t:"Стаю обережною і віддаляюсь, щоб не зачепило", s:"distance"},
+    ]
+  },
+  {
+    id:5,
+    text:"Ти зробила помилку, і це помітили інші. Що ти відчуваєш глибше?",
+    options:[
+      {k:"A", t:"Сором навіть після того, як все виправила", s:"contact"},
+      {k:"B", t:"Потребу компенсувати: зробити більше, краще, швидше", s:"overdo"},
+      {k:"C", t:"Бажання знецінити значення ситуації (“та це дрібниця”)", s:"rationalize"},
+      {k:"D", t:"Режим контролю: аналізую і вибудовую план, щоб не повторити", s:"control"},
+      {k:"E", t:"Напругу від оцінки: “тепер на мене дивляться інакше”", s:"contact"},
+    ]
+  },
+  {
+    id:6,
+    text:"Тебе не запросили туди, куди ти очікувала (зустріч/подія/проєкт). Що виникає всередині?",
+    options:[
+      {k:"A", t:"Відчуття: «мене недооцінили» і хочеться довести цінність", s:"overdo"},
+      {k:"B", t:"Біль/сум, але я його ховаю", s:"avoid"},
+      {k:"C", t:"Автоматично: «мені це й не потрібно» (відсіч)", s:"distance"},
+      {k:"D", t:"Хочу з’ясувати причину, щоб повернути ясність", s:"control"},
+      {k:"E", t:"Віддаляюсь і починаю “відпускати” цей контакт", s:"avoid"},
+    ]
+  },
+  {
+    id:7,
+    text:"Хтось порушує твої межі (тисне, просить зайве, заходить надто близько). Що ти відчуваєш глибше за все?",
+    options:[
+      {k:"A", t:"Мені складно сказати «ні», потім злюся на себе", s:"adapt"},
+      {k:"B", t:"Хочу пояснити, чому так не можна (і йду в аргументи)", s:"control"},
+      {k:"C", t:"З’являється холодна злість, і я різко “відсікаю”", s:"distance"},
+      {k:"D", t:"Сумнів: «а раптом я перебільшую?»", s:"contact"},
+      {k:"E", t:"Роблю вигляд, що все нормально, але всередині напруга росте", s:"adapt"},
+    ]
+  },
+  {
+    id:8,
+    text:"Тебе хвалять публічно (на роботі/в колі людей). Що відбувається всередині?",
+    options:[
+      {k:"A", t:"Ніяковість: хочеться “зменшитись”", s:"contact"},
+      {k:"B", t:"Думка: «перебільшують» або “не зовсім заслужила”", s:"rationalize"},
+      {k:"C", t:"Полегшення: “окей, зі мною все гаразд”", s:"resource"},
+      {k:"D", t:"Внутрішнє знецінення похвали, щоб не залежати", s:"distance"},
+      {k:"E", t:"Аналіз: наскільки це об’єктивно і що за цим стоїть", s:"rationalize"},
+    ]
+  },
+  {
+    id:9,
+    text:"У близьких стосунках виникає напруга: розмова стає холодною, відповіді короткі, з’являється дистанція. Що з тобою відбувається всередині?",
+    options:[
+      {k:"A", t:"Я першою намагаюся все згладити, щоб не втратити контакт", s:"adapt"},
+      {k:"B", t:"Починаю думати, що зробила щось не так", s:"contact"},
+      {k:"C", t:"Стаю стриманою і віддаляюся у відповідь", s:"distance"},
+      {k:"D", t:"Починаю пояснювати логічно, чому ситуація не така серйозна", s:"rationalize"},
+      {k:"E", t:"Внутрішньо тривожуся, що мене можуть відштовхнути", s:"contact"},
+    ]
+  },
+  {
+    id:10,
+    text:"Ти бачиш, що інші досягають більшого / їх більше помічають. Що виникає всередині?",
+    options:[
+      {k:"A", t:"Думка: «мені треба бути кращою»", s:"overdo"},
+      {k:"B", t:"Сором/стиснення і бажання “сховатись”", s:"avoid"},
+      {k:"C", t:"Знецінення їх успіху (щоб не боліло)", s:"distance"},
+      {k:"D", t:"Холодний аналіз: “у чому різниця, які ресурси?”", s:"rationalize"},
+      {k:"E", t:"Режим старання: “я маю працювати ще більше”", s:"overdo"},
+    ]
+  },
+  {
+    id:11,
+    text:"Ти написала важливе повідомлення. Людина онлайн, але не відповідає. Твої перші автоматичні дії:",
+    options:[
+      {k:"A", t:"Перечитую своє повідомлення, шукаючи помилку", s:"contact"},
+      {k:"B", t:"Хочу написати ще щось, щоб не залишати паузу", s:"contact"},
+      {k:"C", t:"Закриваюся і вирішую більше не писати першою", s:"avoid"},
+      {k:"D", t:"Думаю: «Мабуть, зайнята», і намагаюся відключити емоції", s:"rationalize"},
+      {k:"E", t:"Відчуваю напругу, яка довго не відпускає", s:"contact"},
+    ]
+  },
+  {
+    id:12,
+    text:"Під час суперечки людина говорить щось, що зачіпає тебе особисто. Що ти робиш?",
+    options:[
+      {k:"A", t:"Починаю детально пояснювати свою позицію, щоб мене правильно зрозуміли", s:"control"},
+      {k:"B", t:"Шукаю, де я могла бути неправа", s:"adapt"},
+      {k:"C", t:"Внутрішньо закриваюся і стаю холодною", s:"distance"},
+      {k:"D", t:"Починаю доводити, що я права", s:"control"},
+      {k:"E", t:"Замовкаю, навіть якщо всередині кипить", s:"avoid"},
+    ]
+  },
+  {
+    id:13,
+    text:"Тобі потрібно попросити допомогу (побут/робота/емоційна підтримка). Що з тобою відбувається всередині?",
+    options:[
+      {k:"A", t:"Відчуття: “я маю впоратися сама” (і тягну до останнього)", s:"control"},
+      {k:"B", t:"Сором/страх виглядати слабкою", s:"contact"},
+      {k:"C", t:"Я формулюю дуже раціонально, ніби “обґрунтовую запит”", s:"rationalize"},
+      {k:"D", t:"Прошу, але сильно залежу від реакції (чи “не відкинуть”)", s:"contact"},
+      {k:"E", t:"Відкладаю/не прошу, а потім злюся або виснажуюсь", s:"avoid"},
+    ]
+  },
+  {
+    id:14,
+    text:"Тебе щиро хвалять за результат або риси характеру. Що ти відчуваєш глибше за все?",
+    options:[
+      {k:"A", t:"Ніяковість — хочеться применшити це", s:"contact"},
+      {k:"B", t:"Думку, що я ще не достатньо хороша для таких слів", s:"overdo"},
+      {k:"C", t:"Полегшення: «значить, я все роблю правильно»", s:"resource"},
+      {k:"D", t:"Потребу одразу пояснити, що це не лише моя заслуга", s:"adapt"},
+      {k:"E", t:"Холодний аналіз — наскільки це об’єктивно", s:"rationalize"},
+    ]
+  },
+  {
+    id:15,
+    text:"Ти щиро ділишся чимось важливим, але відчуваєш, що тебе не почули. Твоя реакція:",
+    options:[
+      {k:"A", t:"Починаю пояснювати ще раз іншими словами", s:"control"},
+      {k:"B", t:"Думаю, що, мабуть, я погано сформулювала", s:"contact"},
+      {k:"C", t:"Вирішую більше не відкриватися", s:"avoid"},
+      {k:"D", t:"Внутрішньо знецінюю розмову", s:"distance"},
+      {k:"E", t:"Починаю аналізувати, чому це сталося", s:"rationalize"},
+    ]
+  },
+  {
+    id:16,
+    text:"Ти злишся, але розумієш, що відкритий конфлікт може погіршити стосунки. Що відбувається?",
+    options:[
+      {k:"A", t:"Стаю холодною і стриманою", s:"distance"},
+      {k:"B", t:"Починаю відчувати провину за свою злість", s:"adapt"},
+      {k:"C", t:"Пояснюю причину спокійно і раціонально", s:"rationalize"},
+      {k:"D", t:"Закриваюся і віддаляюся", s:"avoid"},
+      {k:"E", t:"Переконую себе, що це дрібниці", s:"rationalize"},
+    ]
+  },
+  {
+    id:17,
+    text:"Хтось говорить: «Ти занадто емоційна / різка / вимоглива». Твоє внутрішнє переживання:",
+    options:[
+      {k:"A", t:"Думаю, що треба змінитися", s:"adapt"},
+      {k:"B", t:"Починаю доводити, що це несправедливо", s:"control"},
+      {k:"C", t:"Стаю холодною і дистанціююся", s:"distance"},
+      {k:"D", t:"Починаю аналізувати, чи це правда", s:"rationalize"},
+      {k:"E", t:"Замовкаю, навіть якщо боляче", s:"avoid"},
+    ]
+  },
+  {
+    id:18,
+    text:"Потрібно прийняти важливе рішення (робота/стосунки/життя). Що ти відчуваєш глибше за все?",
+    options:[
+      {k:"A", t:"Страх помилки: “а раптом зіпсую”", s:"contact"},
+      {k:"B", t:"Потребу все проаналізувати до кінця (і застрягаю)", s:"rationalize"},
+      {k:"C", t:"Хочу відкласти, щоб не відчувати напругу", s:"avoid"},
+      {k:"D", t:"Різко вирішую, щоб “закрити” стан невизначеності", s:"control"},
+      {k:"E", t:"Потребу отримати підтвердження/пораду, щоб стало спокійніше", s:"contact"},
+    ]
+  },
+  {
+    id:19,
+    text:"Ти ловиш відчуття, що тебе можуть “залишити” або відсунути. Що з тобою відбувається всередині?",
+    options:[
+      {k:"A", t:"Я починаю більше вкладатися, щоб втримати контакт", s:"contact"},
+      {k:"B", t:"Автоматично думаю: “це через мене”", s:"contact"},
+      {k:"C", t:"Віддаляюсь першою, щоб не боліло", s:"distance"},
+      {k:"D", t:"Знецінюю людину (щоб повернути контроль)", s:"distance"},
+      {k:"E", t:"Раціоналізую: “так буває”, і відключаю емоції", s:"rationalize"},
+    ]
+  },
+  {
+    id:20,
+    text:"Момент близькості: хтось стає до тебе дуже теплим і відкритим. Що ти відчуваєш глибше за все?",
+    options:[
+      {k:"A", t:"Легку тривогу — а раптом це ненадовго", s:"contact"},
+      {k:"B", t:"Думку: «Чи достатня я для цього?»", s:"overdo"},
+      {k:"C", t:"Потребу контролювати ситуацію", s:"control"},
+      {k:"D", t:"Обережність, ніби треба не поспішати", s:"avoid"},
+      {k:"E", t:"Починаю аналізувати, що це означає", s:"rationalize"},
+    ]
+  },
+];
 
-  let i=0;
-  const total = data.questions.length;
+/** =========================
+ *  DAILY MODES (8)
+ *  ========================= */
+const DAILY_MODES = [
+  { key:"contact",     label:"Я намагалася зберегти контакт" },
+  { key:"control",     label:"Я більше контролювала ситуацію" },
+  { key:"avoid",       label:"Я уникала / відходила" },
+  { key:"rationalize", label:"Я аналізувала і вимикала емоції" },
+  { key:"overdo",      label:"Я доводила / старалась більше" },
+  { key:"distance",    label:"Я тримала дистанцію" },
+  { key:"adapt",       label:"Я адаптувалась, щоб зменшити напругу" },
+  { key:"resource",    label:"Я була в ресурсі і спокої" },
+];
 
-  function updateCounter(){
-    document.getElementById("counter").textContent = `Питання: ${Math.min(i+1,total)} / ${total}`;
+/** =========================
+ *  STORAGE
+ *  ========================= */
+const LS_KEY = "dy_app_state_v1";
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return { answers:{}, lastResult:null, daily:[] };
+    return JSON.parse(raw);
+  }catch(e){
+    return { answers:{}, lastResult:null, daily:[] };
   }
-
-  function topTwo(){
-    return Object.entries(scores).sort((a,b)=>b[1]-a[1]).slice(0,2).map(e=>e[0]);
-  }
-
-  function renderQ(){
-    updateCounter();
-    const q = data.questions[i];
-    let html = `
-      <div style="font-size:28px;font-weight:900;margin:0 0 8px;">${q.text}</div>
-      <div class="hint">Обери один варіант — той, який найближче до твоєї реальної реакції.</div>
-    `;
-    q.options.forEach(o=>{
-      html += `<p style="margin:0 0 12px;"><button onclick='pick(${JSON.stringify(o.tags)})'>${o.text}</button></p>`;
-    });
-    document.getElementById("app").innerHTML = html;
-  }
-
-  window.pick = function(tags){
-    Object.entries(tags).forEach(([k,v])=>scores[k]+=v);
-    i++;
-    if(i>=total){
-      renderResult();
-    }else{
-      renderQ();
-    }
-  }
-
-  function renderResult(){
-    document.getElementById("counter").textContent = `Питання: ${total} / ${total}`;
-
-    const [a,b] = topTwo();
-    const text1 = data.strategies[a];
-    const text2 = data.strategies[b];
-
-    document.getElementById("app").innerHTML = `
-      <div style="font-size:32px;font-weight:900;margin:0 0 10px;">Твій внутрішній код</div>
-
-      <p style="font-size:18px;line-height:1.65;margin:0 0 14px;">
-        Схоже, у напрузі твоя психіка поєднує <b>${text1}</b> та <b>${text2}</b>.
-        Це спосіб повернути собі контроль і відчуття безпеки.
-      </p>
-
-      <p style="font-size:18px;line-height:1.65;margin:0 0 14px;">
-        У такі моменти ти можеш автоматично брати відповідальність на себе,
-        намагатися щось виправити або швидко відновити контакт, щоб знову відчути стабільність.
-      </p>
-
-      <p style="font-size:18px;line-height:1.65;margin:0 0 14px;">
-        Це дає відчуття керованості, але поступово забирає м’якість до себе і внутрішню опору.
-      </p>
-
-      <p style="font-size:18px;line-height:1.65;margin:0 0 16px;">
-        Твій напрям розвитку — навчитися залишатися в контакті без автоматичного самозвинувачення
-        та без потреби доводити свою цінність.
-      </p>
-
-      <button class="cta" onclick="alert('Premium скоро: глибша персоналізація + Точка опори + практика')">
-        Перейти в глибину (Premium)
-      </button>
-    `;
-  }
-
-  renderQ();
 }
-main();
-</script>
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-     navigator.serviceWorker.register("sw.js")
-    });
+function saveState(s){
+  localStorage.setItem(LS_KEY, JSON.stringify(s));
+}
+
+/** =========================
+ *  UI TAB SYSTEM
+ *  ========================= */
+const tabs = document.querySelectorAll(".tab");
+const views = {
+  test: document.getElementById("viewTest"),
+  result: document.getElementById("viewResult"),
+  daily: document.getElementById("viewDaily"),
+  dynamics: document.getElementById("viewDynamics"),
+};
+function setTab(name){
+  tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+  Object.entries(views).forEach(([k,el]) => el.style.display = (k===name ? "block" : "none"));
+  renderAll(); // keep in sync
+}
+tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
+
+const statusPill = document.getElementById("statusPill");
+
+/** =========================
+ *  HELPERS
+ *  ========================= */
+function fmtDate(d){
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+function todayKey(){ return fmtDate(new Date()); }
+
+function strategyByKey(k){ return STRATEGIES.find(s=>s.key===k); }
+
+function computeResult(answers){
+  // scores per strategy
+  const scores = {};
+  STRATEGIES.forEach(s => scores[s.key]=0);
+
+  // count each selected option as +1 for mapped strategy
+  QUESTIONS.forEach(q=>{
+    const pick = answers[q.id];
+    if(!pick) return;
+    const opt = q.options.find(o=>o.k===pick);
+    if(!opt) return;
+    scores[opt.s] += 1;
+  });
+
+  // choose top strategy
+  let bestKey = STRATEGIES[0].key;
+  let bestVal = -1;
+  for(const [k,v] of Object.entries(scores)){
+    if(v>bestVal){ bestVal=v; bestKey=k; }
   }
+
+  // If tie, keep first by strategy order
+  const best = strategyByKey(bestKey);
+
+  // Secondary: top2
+  const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const top2 = sorted.slice(0,2).map(([k,v])=>({key:k, val:v, name:strategyByKey(k).name}));
+
+  return { bestKey, scores, top2, computedAt: Date.now() };
+}
+
+function dailyInsight(modeKey, stress){
+  const s = Number(stress||0);
+  // short micro-insights: mode + stress threshold
+  const high = s >= 7;
+  const mid = s >= 4 && s <= 6;
+
+  const templates = {
+    control: {
+      high: "Сьогодні ти посилила режим контролю. При високій напрузі він дає ілюзію стабільності, але підсилює втому. Завтра делегуй одну дрібну річ.",
+      mid:  "Ти тримала структуру і ясність. Перевір: чи це контроль, чи опора? Якщо опора — підкресли, що саме допомогло.",
+      low:  "Контроль виглядає як твоя здорова опора. Збережи цю структуру, але не перевантажуй себе «ідеально».",
+    },
+    avoid: {
+      high: "Схоже, ти захищалась тишею або дистанцією. Це зменшує біль, але може збільшувати самотність. Одна коротка фраза ясності завтра — вже прогрес.",
+      mid:  "Ти обирала обережність. Подумай: де варто уточнити, а де справді краще дати собі час.",
+      low:  "Уникнення тут схоже на здорове самозбереження. Важливо не застрягнути в ньому надовго.",
+    },
+    contact: {
+      high: "Було багато тривоги навколо контакту. Спробуй завтра зробити паузу перед уточненнями і запитати себе: «Я зараз пишу з близькості чи з тривоги?»",
+      mid:  "Ти була уважна до зв’язку. Добре. Додай трохи опори: одна дія для себе, не для інших.",
+      low:  "Ти тримаєш контакт без перенапруги. Це дуже ресурсно — зафіксуй, що саме так спрацювало.",
+    },
+    rationalize: {
+      high: "Ти пішла в голову, щоб витримати напругу. Повернися в тіло: назви одну емоцію словами, без пояснень.",
+      mid:  "Аналіз допоміг втримати ясність. Перевір, чи не пропустила ти сигнал емоції — хоча б 10%.",
+      low:  "Раціональність сьогодні працювала як сила. Збережи баланс: 1 факт + 1 відчуття.",
+    },
+    overdo: {
+      high: "Старання могло бути способом заглушити тривогу. Завтра дозволь собі «80% достатньо добре» в одній задачі.",
+      mid:  "Ти працювала на результат. Спробуй завершити день маленьким «я молодець» без умов.",
+      low:  "Старання сьогодні виглядає здоровим. Просто не підвищуй планку автоматично.",
+    },
+    distance: {
+      high: "Дистанція могла захистити тебе від болю. Завтра — одне уточнення замість різкої відсічі: «Я правильно зрозуміла, що…?»",
+      mid:  "Ти тримала межі. Перевір: чи це межа, чи втеча від вразливості.",
+      low:  "Дистанція сьогодні виглядає як спокійна автономія. Це ок.",
+    },
+    adapt: {
+      high: "Ти згладжувала напругу ціною себе. Завтра — одна маленька межа: «Мені так не підходить».",
+      mid:  "Адаптація допомогла зберегти мир. Додай: що ти хочеш для себе в цій ситуації?",
+      low:  "Ти вмієш бути м’якою без самозради. Це класна сила.",
+    },
+    resource: {
+      high: "Навіть у ресурсному режимі напруга була високою. Дай собі відновлення: сон/вода/тіло/тиша. Це не слабкість.",
+      mid:  "Стабільність тримається. Зафіксуй: що саме дає ресурс? Повтори завтра.",
+      low:  "Сьогодні ти була в ресурсі. Підсиль це: маленький ритуал опори на завтра.",
+    },
+  };
+
+  const t = templates[modeKey] || templates.resource;
+  if(high) return t.high;
+  if(mid) return t.mid;
+  return t.low;
+}
+
+/** =========================
+ *  RENDER: TEST
+ *  ========================= */
+function renderTest(){
+  const state = loadState();
+  const answers = state.answers || {};
+  const total = QUESTIONS.length;
+  const answered = Object.keys(answers).length;
+
+  statusPill.textContent = answered === total
+    ? "Тест заповнений ✅"
+    : `Заповнено: ${answered}/${total}`;
+
+  let html = `
+    <div class="row">
+      <div class="col">
+        <h2 class="title">Тест: 20 живих ситуацій</h2>
+        <p class="hint">
+          Обирай <b>найближчу</b> відповідь. Тут немає «правильно/неправильно».
+          Твоя мета — побачити свою <b>автоматичну</b> стратегію.
+        </p>
+        <div class="actions">
+          <button class="btnPrimary" id="btnCalc">Порахувати результат</button>
+          <button class="btnGhost" id="btnGoDaily">Перейти до “Щодня”</button>
+          <button class="btnDanger" id="btnReset">Скинути відповіді</button>
+        </div>
+        <p class="mini" style="margin-top:10px">
+          Підказка: якщо зависла сторінка — онови <span class="kbd">⌘R</span>.
+        </p>
+      </div>
+
+      <div class="col">
+        <div class="resultBox">
+          <p class="mini" style="margin:0 0 6px">Швидкий статус</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="pill">Відповідей: <b>${answered}</b> / ${total}</span>
+            <span class="pill">Free: історія <b>7 днів</b></span>
+          </div>
+          <p class="hint" style="margin-top:10px">
+            Після тесту додаток дає результат і починається “живе” використання: щоденні check-in + динаміка.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  QUESTIONS.forEach(q=>{
+    html += `
+      <div class="q" data-qid="${q.id}">
+        <h3>${q.id}️⃣ ${q.text}</h3>
+        <div class="opts">
+          ${q.options.map(o=>{
+            const selected = answers[q.id] === o.k ? "selected" : "";
+            return `
+              <div class="opt ${selected}" data-qid="${q.id}" data-opt="${o.k}">
+                <div class="badge">${o.k}</div>
+                <div>${o.t}</div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  });
+
+  views.test.innerHTML = html;
+
+  // bind option clicks
+  views.test.querySelectorAll(".opt").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      const qid = Number(el.dataset.qid);
+      const opt = el.dataset.opt;
+      const st = loadState();
+      st.answers = st.answers || {};
+      st.answers[qid] = opt;
+      saveState(st);
+      renderAll();
+    });
+  });
+
+  // buttons
+  document.getElementById("btnCalc").onclick = ()=>{
+    const st = loadState();
+    const answeredNow = Object.keys(st.answers||{}).length;
+    if(answeredNow < QUESTIONS.length){
+      alert("Заповни, будь ласка, всі 20 питань — тоді результат буде точним 🙂");
+      return;
+    }
+    st.lastResult = computeResult(st.answers);
+    saveState(st);
+    setTab("result");
+  };
+
+  document.getElementById("btnGoDaily").onclick = ()=> setTab("daily");
+
+  document.getElementById("btnReset").onclick = ()=>{
+    if(!confirm("Скинути відповіді тесту?")) return;
+    const st = loadState();
+    st.answers = {};
+    st.lastResult = null;
+    saveState(st);
+    renderAll();
+  };
+}
+
+/** =========================
+ *  RENDER: RESULT
+ *  ========================= */
+function renderResult(){
+  const state = loadState();
+  const r = state.lastResult;
+
+  if(!r){
+    views.result.innerHTML = `
+      <h2 class="title">Результат</h2>
+      <p class="hint">Спочатку заповни тест (20 питань) і натисни “Порахувати результат”.</p>
+      <div class="actions">
+        <button class="btnPrimary" onclick="(${setTab.toString()})('test')">Повернутися до тесту</button>
+      </div>
+    `;
+    return;
+  }
+
+  const best = strategyByKey(r.bestKey);
+  const top2 = r.top2 || [];
+
+  // score list (compact)
+  const scoreList = STRATEGIES
+    .map(s=>({name:s.name, key:s.key, val: r.scores[s.key]||0}))
+    .sort((a,b)=>b.val-a.val);
+
+  views.result.innerHTML = `
+    <div class="row">
+      <div class="col">
+        <h2 class="title">Твоя базова стратегія</h2>
+        <div class="resultBox">
+          <h3 class="resTitle">${best.name}</h3>
+          <p class="resText">${best.wow}</p>
+        </div>
+
+        <div class="actions" style="margin-top:12px">
+          <button class="btnPrimary" id="btnStartDaily">Почати щоденний check-in</button>
+          <button class="btnGhost" id="btnBackTest">Повернутися до тесту</button>
+        </div>
+
+        <p class="mini" style="margin-top:10px">
+          P.S. Твій результат збережено локально на цьому пристрої (localStorage).
+        </p>
+      </div>
+
+      <div class="col">
+        <h2 class="title">Профіль (top-2)</h2>
+        <p class="hint">Іноді ми маємо 1 головну стратегію + 1 “другу”, яка вмикається під стресом.</p>
+        <div class="grid2">
+          ${top2.map(x=>`
+            <div class="resultBox">
+              <div class="pill">Балів: <b>${x.val}</b></div>
+              <h3 class="resTitle" style="margin-top:8px">${x.name}</h3>
+              <p class="mini" style="margin:0">Ключ: <span class="kbd">${x.key}</span></p>
+            </div>
+          `).join("")}
+        </div>
+
+        <h3 class="title" style="margin-top:16px">Розклад балів</h3>
+        <ul class="list">
+          ${scoreList.map(s=>`
+            <li class="item">
+              <div style="display:flex;justify-content:space-between;gap:10px">
+                <div>${s.name}</div>
+                <div class="pill"><b>${s.val}</b></div>
+              </div>
+            </li>
+          `).join("")}
+        </ul>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("btnStartDaily").onclick = ()=> setTab("daily");
+  document.getElementById("btnBackTest").onclick = ()=> setTab("test");
+}
+
+/** =========================
+ *  RENDER: DAILY
+ *  ========================= */
+function renderDaily(){
+  const state = loadState();
+  const today = todayKey();
+  const existing = (state.daily||[]).find(e=>e.date===today);
+
+  const modeKey = existing?.modeKey || "";
+  const stress = existing?.stress ?? 5;
+  const trigger = existing?.trigger || "";
+
+  const modeName = modeKey ? (strategyByKey(modeKey)?.name || modeKey) : "—";
+
+  views.daily.innerHTML = `
+    <div class="row">
+      <div class="col">
+        <h2 class="title">Щоденний check-in</h2>
+        <p class="hint">
+          3 кроки. Без аналізу. Просто фіксація.
+          Це створює динаміку і повернення в додаток.
+        </p>
+
+        <div class="q">
+          <h3>1️⃣ Сьогодні я більше була в режимі:</h3>
+          <div class="opts">
+            ${DAILY_MODES.map(m=>{
+              const selected = (modeKey === m.key) ? "selected" : "";
+              return `
+                <div class="opt ${selected}" data-mode="${m.key}">
+                  <div class="badge">DY</div>
+                  <div>${m.label}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+
+          <div class="label">2️⃣ Рівень внутрішньої напруги: <span class="pill"><b id="stressVal">${stress}</b>/10</span></div>
+          <input type="range" id="stress" min="0" max="10" step="1" value="${stress}">
+
+          <div class="label">3️⃣ Тригер (коротко, для себе)</div>
+          <input type="text" id="trigger" maxlength="120" placeholder="Напр.: «перебили на зустрічі» / «пауза в чаті»" value="${escapeHtml(trigger)}">
+          <p class="mini" style="margin-top:8px">Збережеться в історії на 7 днів.</p>
+
+          <div class="actions">
+            <button class="btnPrimary" id="btnSaveDaily">Зберегти сьогодні</button>
+            <button class="btnGhost" id="btnGoDyn">Подивитися динаміку</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h2 class="title">Мікро-інсайт</h2>
+        <div class="resultBox" id="insightBox">
+          <p class="mini" style="margin:0 0 6px">Сьогоднішній режим:</p>
+          <h3 class="resTitle" style="margin-top:0">${modeName}</h3>
+          <p class="resText" id="insightText">${modeKey ? dailyInsight(modeKey, stress) : "Обери режим і напругу — і я покажу короткий інсайт."}</p>
+        </div>
+
+        <h3 class="title" style="margin-top:16px">Нагадування (free-логіка)</h3>
+        <p class="hint">
+          У free ми зберігаємо <b>7 днів</b>. Це вже достатньо, щоб побачити патерн.
+          Далі (пізніше) можна буде додати 30 днів як premium.
+        </p>
+      </div>
+    </div>
+  `;
+
+  // bind mode clicks
+  views.daily.querySelectorAll("[data-mode]").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      views.daily.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("selected"));
+      el.classList.add("selected");
+
+      const st = loadState();
+      const mk = el.dataset.mode;
+      const entry = getOrCreateToday(st, today);
+      entry.modeKey = mk;
+      saveState(st);
+
+      // update insight
+      const stressV = Number(document.getElementById("stress").value);
+      document.getElementById("insightText").textContent = dailyInsight(mk, stressV);
+      const modeName = strategyByKey(mk)?.name || mk;
+      document.querySelector("#insightBox .resTitle").textContent = modeName;
+    });
+  });
+
+  // stress live update
+  const stressEl = document.getElementById("stress");
+  stressEl.addEventListener("input", ()=>{
+    document.getElementById("stressVal").textContent = stressEl.value;
+    const st = loadState();
+    const entry = getOrCreateToday(st, today);
+    entry.stress = Number(stressEl.value);
+    saveState(st);
+
+    const mk = (loadState().daily.find(e=>e.date===today)?.modeKey) || "";
+    if(mk) document.getElementById("insightText").textContent = dailyInsight(mk, stressEl.value);
+  });
+
+  // trigger
+  const trigEl = document.getElementById("trigger");
+  trigEl.addEventListener("input", ()=>{
+    const st = loadState();
+    const entry = getOrCreateToday(st, today);
+    entry.trigger = trigEl.value;
+    saveState(st);
+  });
+
+  // save
+  document.getElementById("btnSaveDaily").onclick = ()=>{
+    const st = loadState();
+    const entry = getOrCreateToday(st, today);
+    // make sure fields saved
+    entry.stress = Number(document.getElementById("stress").value);
+    entry.trigger = document.getElementById("trigger").value;
+
+    // validate
+    if(!entry.modeKey){
+      alert("Обери, будь ласка, режим дня 🙂");
+      return;
+    }
+
+    // keep only last 7 days
+    st.daily = trimTo7Days(st.daily || []);
+    saveState(st);
+
+    statusPill.textContent = "Збережено ✅";
+    setTimeout(()=>renderAll(), 50);
+  };
+
+  document.getElementById("btnGoDyn").onclick = ()=> setTab("dynamics");
+}
+
+function getOrCreateToday(st, today){
+  st.daily = st.daily || [];
+  let entry = st.daily.find(e=>e.date===today);
+  if(!entry){
+    entry = { date: today, modeKey:"", stress:5, trigger:"" };
+    st.daily.push(entry);
+  }
+  return entry;
+}
+
+function trimTo7Days(arr){
+  // keep entries within last 7 days inclusive
+  const now = new Date();
+  const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+  return arr
+    .filter(e=>{
+      const d = new Date(e.date + "T00:00:00");
+      return d >= cutoff;
+    })
+    .sort((a,b)=>a.date.localeCompare(b.date));
+}
+
+/** =========================
+ *  RENDER: DYNAMICS (7 days)
+ *  ========================= */
+function renderDynamics(){
+  const st = loadState();
+  const daily = trimTo7Days(st.daily || []);
+  // ensure state trimmed
+  st.daily = daily;
+  saveState(st);
+
+  // Prepare 7-day array including missing days
+  const days = [];
+  const now = new Date();
+  for(let i=6;i>=0;i--){
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate()-i);
+    const key = fmtDate(d);
+    const entry = daily.find(x=>x.date===key) || null;
+    days.push({ date:key, entry });
+  }
+
+  // counts by mode
+  const counts = {};
+  DAILY_MODES.forEach(m=>counts[m.key]=0);
+  days.forEach(d=>{
+    if(d.entry?.modeKey) counts[d.entry.modeKey] += 1;
+  });
+
+  const listHtml = days.map(d=>{
+    const e = d.entry;
+    if(!e) return `
+      <li class="item">
+        <div style="display:flex;justify-content:space-between;gap:10px">
+          <div><b>${d.date}</b></div>
+          <div class="pill">немає запису</div>
+        </div>
+      </li>
+    `;
+    const modeName = strategyByKey(e.modeKey)?.name || e.modeKey;
+    return `
+      <li class="item">
+        <div style="display:flex;justify-content:space-between;gap:10px">
+          <div><b>${d.date}</b> — ${modeName}</div>
+          <div class="pill">напруга: <b>${e.stress}</b>/10</div>
+        </div>
+        ${e.trigger ? `<div class="mini" style="margin-top:6px">Тригер: ${escapeHtml(e.trigger)}</div>` : `<div class="mini" style="margin-top:6px">Тригер: —</div>`}
+      </li>
+    `;
+  }).join("");
+
+  views.dynamics.innerHTML = `
+    <div class="row">
+      <div class="col">
+        <h2 class="title">Динаміка за 7 днів</h2>
+        <p class="hint">
+          Тут “магія”: ти бачиш патерн. Це створює щоденне повернення.
+        </p>
+
+        <div class="q">
+          <h3>📈 Графік напруги</h3>
+          <canvas id="chart" width="800" height="240"></canvas>
+          <p class="mini" style="margin-top:8px">Показує останні 7 днів (0–10).</p>
+        </div>
+
+        <div class="q">
+          <h3>📌 Частота режимів</h3>
+          <ul class="list" id="modeCounts">
+            ${DAILY_MODES.map(m=>`
+              <li class="item">
+                <div style="display:flex;justify-content:space-between;gap:10px">
+                  <div>${m.label}</div>
+                  <div class="pill"><b>${counts[m.key]}</b></div>
+                </div>
+              </li>
+            `).join("")}
+          </ul>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" id="btnGoDaily2">Зробити check-in</button>
+          <button class="btnDanger" id="btnClear7">Очистити 7-денну історію</button>
+        </div>
+      </div>
+
+      <div class="col">
+        <h2 class="title">Останні 7 днів (список)</h2>
+        <ul class="list">${listHtml}</ul>
+      </div>
+    </div>
+  `;
+
+  // draw chart
+  drawChart(days);
+
+  document.getElementById("btnGoDaily2").onclick = ()=> setTab("daily");
+
+  document.getElementById("btnClear7").onclick = ()=>{
+    if(!confirm("Очистити всю 7-денну історію?")) return;
+    const s = loadState();
+    s.daily = [];
+    saveState(s);
+    renderAll();
+  };
+}
+
+function drawChart(days){
+  const c = document.getElementById("chart");
+  if(!c) return;
+  const ctx = c.getContext("2d");
+
+  // clear
+  ctx.clearRect(0,0,c.width,c.height);
+
+  // padding
+  const padL=48, padR=18, padT=18, padB=36;
+  const W = c.width - padL - padR;
+  const H = c.height - padT - padB;
+
+  // background grid
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = "rgba(27,21,48,.10)";
+  ctx.lineWidth = 1;
+
+  for(let i=0;i<=10;i+=2){
+    const y = padT + H * (1 - i/10);
+    ctx.beginPath();
+    ctx.moveTo(padL, y);
+    ctx.lineTo(padL+W, y);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(107,93,134,.85)";
+    ctx.font = "12px ui-sans-serif";
+    ctx.fillText(String(i), 14, y+4);
+  }
+
+  // points
+  const vals = days.map(d => (d.entry ? Number(d.entry.stress) : null));
+  const xs = days.map((_,i)=> padL + (W * i/(days.length-1)));
+  const ys = vals.map(v => (v===null ? null : padT + H * (1 - v/10)));
+
+  // line
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "rgba(205,183,255,.95)"; // violet line
+  ctx.beginPath();
+  let started=false;
+  for(let i=0;i<days.length;i++){
+    if(ys[i]===null) { started=false; continue; }
+    if(!started){ ctx.moveTo(xs[i], ys[i]); started=true; }
+    else ctx.lineTo(xs[i], ys[i]);
+  }
+  ctx.stroke();
+
+  // points dots (gold)
+  for(let i=0;i<days.length;i++){
+    if(ys[i]===null) continue;
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(214,178,90,.90)";
+    ctx.arc(xs[i], ys[i], 5, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(27,21,48,.12)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // x labels
+  ctx.fillStyle = "rgba(107,93,134,.95)";
+  ctx.font = "12px ui-sans-serif";
+  for(let i=0;i<days.length;i++){
+    const dd = days[i].date.slice(5); // MM-DD
+    ctx.fillText(dd, xs[i]-18, padT+H+24);
+  }
+}
+
+/** =========================
+ *  RENDER ALL
+ *  ========================= */
+function renderAll(){
+  renderTest();
+  renderResult();
+  renderDaily();
+  renderDynamics();
+}
+
+/** =========================
+ *  UTIL: HTML escape
+ *  ========================= */
+function escapeHtml(s){
+  return (s||"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+// initial
+renderAll();
 </script>
 </body>
 </html>
