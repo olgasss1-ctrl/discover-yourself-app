@@ -347,6 +347,27 @@
       color: var(--muted);
       font-size:12px;
     }
+    .qnum{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  height:34px;
+  padding:0 12px;
+  border-radius:999px;
+
+  font-weight:800;
+  font-size:14px;
+
+  color:#2a164f;
+
+  background:
+    radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, rgba(201,176,255,.95), rgba(255,214,140,.55));
+
+  border:1px solid rgba(86,48,140,.18);
+  box-shadow: 0 6px 16px rgba(40,18,80,.10);
+}
   </style>
 </head>
 
@@ -881,7 +902,7 @@ function renderTest(){
   QUESTIONS.forEach(q=>{
     html += `
       <div class="q" data-qid="${q.id}">
-        <h3>${q.id}️⃣ ${q.text}</h3>
+       <h3><span class="qnum">${q.id}</span> ${q.text}</h3>
         <div class="opts">
           ${q.options.map(o=>{
             const selected = answers[q.id] === o.k ? "selected" : "";
