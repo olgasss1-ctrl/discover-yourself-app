@@ -884,7 +884,6 @@ function renderTest(){
           Твоя мета — побачити свою <b>автоматичну</b> стратегію.
         </p>
         <div class="actions">
-          <button class="btnPrimary" id="btnCalc">Порахувати результат</button>
           <button class="btnGhost" id="btnGoDaily">Перейти до “Щодня”</button>
           <button class="btnDanger" id="btnReset">Скинути відповіді</button>
         </div>
@@ -926,6 +925,11 @@ function renderTest(){
       </div>
     `;
   });
+    html += `
+    <div style="text-align:center; margin-top:24px;">
+      <button class="btnPrimary" id="btnCalc">Порахувати результат</button>
+    </div>
+  `;
 
   views.test.innerHTML = html;
 
