@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Discover Yourself</title>
 
-  <!-- PWA (у тебе вже є manifest + іконки в репо) -->
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0b1220">
 
@@ -15,9 +14,9 @@
       --card:#ffffff;
       --ink:#1b1530;
       --muted:#6b5d86;
-      --violet:#cdb7ff;       /* світло-фіолетовий */
-      --violet-2:#efe8ff;     /* дуже світлий */
-      --gold:#d6b25a;         /* золото */
+      --violet:#cdb7ff;
+      --violet-2:#efe8ff;
+      --gold:#d6b25a;
       --gold-2:#f3e7c6;
       --danger:#c43d4b;
       --ok:#2e7d32;
@@ -53,25 +52,17 @@
       gap:10px;
       user-select:none;
     }
-    .logoDot{
-      width:38px;height:38px;border-radius:12px;
-      background: linear-gradient(135deg, rgba(205,183,255,.95), rgba(214,178,90,.35));
-      border: 1px solid rgba(214,178,90,.45);
+
+    .logoImg{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      object-fit:cover;
+      display:block;
+      border:1px solid rgba(214,178,90,.45);
       box-shadow: 0 8px 18px rgba(20,10,40,.10);
-      display:grid;place-items:center;
-      font-weight:800;
-      color:#20123a;
-      letter-spacing:.5px;
     }
-  .logoImg{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  object-fit:cover;
-  display:block;
-  border:1px solid rgba(214,178,90,.45);
-  box-shadow: 0 8px 18px rgba(20,10,40,.10);
-}
+
     .brand h1{
       font-size:18px;
       margin:0;
@@ -158,79 +149,61 @@
       margin-top:10px;
     }
 
-  .opt{
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  padding:12px 12px;
-  border-radius:16px;
-  border:1px solid rgba(205,183,255,.45);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(239,232,255,.65));
-  cursor:pointer;
-  transition:.14s ease;
-}
-
-.opt:hover{
-  border-color: rgba(214,178,90,.65);
-  box-shadow: 0 14px 22px rgba(20,10,40,.08);
-  transform: translateY(-1px);
-}
-
-.opt.selected{
-  border-color: rgba(214,178,90,.85);
-  background:
-    radial-gradient(220px 80px at 20% 10%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
-    linear-gradient(180deg, rgba(205,183,255,.42), rgba(255,255,255,.92));
-  box-shadow: 0 18px 28px rgba(20,10,40,.10);
-  position:relative;
-}
-
-.opt.selected::after{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:16px;
-  box-shadow:
-    0 0 0 2px rgba(214,178,90,.28),
-    0 0 22px rgba(214,178,90,.18);
-  pointer-events:none;
-}
-
-   .badge{
-  min-width:34px;
-  height:34px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  letter-spacing:.5px;
-
-  background:
-    radial-gradient(16px 16px at 30% 25%, rgba(255,255,255,.95), rgba(255,255,255,0) 60%),
-    linear-gradient(135deg, rgba(205,183,255,.85), rgba(214,178,90,.28));
-
-  border:1px solid rgba(214,178,90,.55);
-  box-shadow:
-    0 10px 18px rgba(20,10,40,.10),
-    0 0 0 2px rgba(205,183,255,.18);
-
-  color:#23143f;
-}
-
-    .opt.selected{
-      border-color: rgba(214,178,90,.75);
-      background: linear-gradient(180deg, rgba(205,183,255,.30), rgba(255,255,255,.92));
-      box-shadow: 0 14px 24px rgba(20,10,40,.09);
+    .opt{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(205,183,255,.45);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(239,232,255,.65));
+      cursor:pointer;
+      transition:.14s ease;
       position:relative;
+    }
+
+    .opt:hover{
+      border-color: rgba(214,178,90,.65);
+      box-shadow: 0 14px 22px rgba(20,10,40,.08);
+      transform: translateY(-1px);
+    }
+
+    /* ✅ ONE canonical selected style (без дубля) */
+    .opt.selected{
+      border-color: rgba(214,178,90,.85);
+      background:
+        radial-gradient(220px 80px at 20% 10%, rgba(255,255,255,.95), rgba(255,255,255,0) 70%),
+        linear-gradient(180deg, rgba(205,183,255,.42), rgba(255,255,255,.92));
+      box-shadow: 0 18px 28px rgba(20,10,40,.10);
     }
     .opt.selected::after{
       content:"";
       position:absolute;
       inset:-1px;
-      border-radius:14px;
-      box-shadow: 0 0 0 2px rgba(214,178,90,.35), 0 0 18px rgba(214,178,90,.18);
+      border-radius:16px;
+      box-shadow:
+        0 0 0 2px rgba(214,178,90,.28),
+        0 0 22px rgba(214,178,90,.18);
       pointer-events:none;
+    }
+
+    .badge{
+      min-width:34px;
+      height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      letter-spacing:.5px;
+      background:
+        radial-gradient(16px 16px at 30% 25%, rgba(255,255,255,.95), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(205,183,255,.85), rgba(214,178,90,.28));
+      border:1px solid rgba(214,178,90,.55);
+      box-shadow:
+        0 10px 18px rgba(20,10,40,.10),
+        0 0 0 2px rgba(205,183,255,.18);
+      color:#23143f;
+      flex:0 0 auto;
     }
 
     .actions{
@@ -256,6 +229,12 @@
       box-shadow: 0 12px 22px rgba(20,10,40,.10);
     }
     .btnPrimary:hover{ transform: translateY(-1px); }
+    .btnPrimary:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none !important;
+      box-shadow:none;
+    }
     .btnGhost{
       background: rgba(255,255,255,.65);
       border:1px solid rgba(27,21,48,.16);
@@ -356,27 +335,58 @@
       color: var(--muted);
       font-size:12px;
     }
+
     .qnum{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:34px;
-  height:34px;
-  padding:0 12px;
-  border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:34px;
+      height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:14px;
+      color:#2a164f;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(201,176,255,.95), rgba(255,214,140,.55));
+      border:1px solid rgba(86,48,140,.18);
+      box-shadow: 0 6px 16px rgba(40,18,80,.10);
+      margin-right:6px;
+      vertical-align:middle;
+    }
 
-  font-weight:800;
-  font-size:14px;
-
-  color:#2a164f;
-
-  background:
-    radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
-    linear-gradient(135deg, rgba(201,176,255,.95), rgba(255,214,140,.55));
-
-  border:1px solid rgba(86,48,140,.18);
-  box-shadow: 0 6px 16px rgba(40,18,80,.10);
-}
+    /* ✅ Progress bar */
+    .progressWrap{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(27,21,48,.12);
+      background: rgba(255,255,255,.65);
+      box-shadow: 0 6px 16px rgba(20,10,40,.05);
+    }
+    .progressTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .progressTrack{
+      height:10px;
+      width:100%;
+      border-radius:999px;
+      background: rgba(27,21,48,.08);
+      overflow:hidden;
+      border:1px solid rgba(27,21,48,.06);
+    }
+    .progressFill{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(205,183,255,.95), rgba(214,178,90,.55));
+      transition: width .18s ease;
+    }
   </style>
 </head>
 
@@ -411,84 +421,50 @@
  *  DATA MODEL (8 strategies)
  *  ========================= */
 const STRATEGIES = [
-  {
-    key:"contact",
-    name:"Контакт / Тривожна близькість",
-    wow: `Ти дуже тонко відчуваєш зміни в тоні, паузи, «охолодження». У моменти невизначеності всередині може підніматися тривога: «а раптом я щось зіпсувала?» і з’являється бажання повернути тепло.
+  { key:"contact", name:"Контакт / Тривожна близькість", wow:`Ти дуже тонко відчуваєш зміни в тоні, паузи, «охолодження». У моменти невизначеності всередині може підніматися тривога: «а раптом я щось зіпсувала?» і з’являється бажання повернути тепло.
 <br><br><b>Приклади:</b> після повідомлення ти перечитуєш його кілька разів; після розмови прокручуєш діалог і шукаєш «де була помилка».
 <br><br><b>Сильна сторона:</b> емпатія й здатність будувати зв’язок.
 <br><b>Ризик:</b> надвкладення й залежність від реакції.
-<br><b>Мікро-крок:</b> пауза 20 хв перед «ще одним уточненням».`
-  },
-  {
-    key:"control",
-    name:"Контроль / Опора через структуру",
-    wow: `Коли стає тривожно, ти береш кермо: плануєш, уточнюєш, «дотискаєш» ясність. Так ти повертаєш відчуття безпеки.
+<br><b>Мікро-крок:</b> пауза 20 хв перед «ще одним уточненням».` },
+  { key:"control", name:"Контроль / Опора через структуру", wow:`Коли стає тривожно, ти береш кермо: плануєш, уточнюєш, «дотискаєш» ясність. Так ти повертаєш відчуття безпеки.
 <br><br><b>Приклади:</b> якщо тебе перебили — хочеться довести думку до кінця; якщо щось незрозуміло — збираєш факти і будуєш план.
 <br><br><b>Сильна сторона:</b> системність і відповідальність.
 <br><b>Ризик:</b> виснаження й жорсткість.
-<br><b>Мікро-крок:</b> делегуй одну дрібну річ або залиш одну невизначеність до завтра.`
-  },
-  {
-    key:"avoid",
-    name:"Уникнення / Захист тишею",
-    wow: `У напрузі ти ніби відходиш в тінь. Це спосіб не боліти й не відкриватися там, де небезпечно.
+<br><b>Мікро-крок:</b> делегуй одну дрібну річ або залиш одну невизначеність до завтра.` },
+  { key:"avoid", name:"Уникнення / Захист тишею", wow:`У напрузі ти ніби відходиш в тінь. Це спосіб не боліти й не відкриватися там, де небезпечно.
 <br><br><b>Приклади:</b> після критики хочеться «зникнути»; коли людина охолола — ти закриваєшся першою.
 <br><br><b>Сильна сторона:</b> самозбереження і обережність.
 <br><b>Ризик:</b> дистанція замість ясності.
-<br><b>Мікро-крок:</b> одна коротка фраза замість мовчання: «Мені важливо уточнити…».`
-  },
-  {
-    key:"rationalize",
-    name:"Раціоналізація / Вимкнути емоції",
-    wow: `Ти швидко переходиш у голову: логіка, аналіз, пояснення. Емоції приглушуються, бо так легше тримати себе.
+<br><b>Мікро-крок:</b> одна коротка фраза замість мовчання: «Мені важливо уточнити…».` },
+  { key:"rationalize", name:"Раціоналізація / Вимкнути емоції", wow:`Ти швидко переходиш у голову: логіка, аналіз, пояснення. Емоції приглушуються, бо так легше тримати себе.
 <br><br><b>Приклади:</b> кажеш собі «це дрібниці»; у конфлікті пояснюєш структуру, навіть якщо болить.
 <br><br><b>Сильна сторона:</b> ясність мислення у стресі.
 <br><b>Ризик:</b> відрив від себе і накопичення напруги.
-<br><b>Мікро-крок:</b> назви 1 емоцію словами без аналізу: «Я злюся / мені страшно / мені сумно».`
-  },
-  {
-    key:"overdo",
-    name:"Старання / Перфекціоністська компенсація",
-    wow: `Коли страшно помилитися або бути «недостатньою», ти піднімаєш планку і компенсуєш діями: робити більше, краще, швидше.
+<br><b>Мікро-крок:</b> назви 1 емоцію словами без аналізу: «Я злюся / мені страшно / мені сумно».` },
+  { key:"overdo", name:"Старання / Перфекціоністська компенсація", wow:`Коли страшно помилитися або бути «недостатньою», ти піднімаєш планку і компенсуєш діями: робити більше, краще, швидше.
 <br><br><b>Приклади:</b> після помилки хочеться перевиконати; після похвали — тривога «а наступного разу?».
 <br><br><b>Сильна сторона:</b> результативність.
 <br><b>Ризик:</b> самокритика і вигорання.
-<br><b>Мікро-крок:</b> зроби «достатньо добре» (80%) в одній задачі.`
-  },
-  {
-    key:"distance",
-    name:"Дистанція / Відсікти, щоб не бути вразливою",
-    wow: `Коли відчувається холод або несправедливість, може піднятися внутрішня крига: ти віддаляєшся, інколи з знеціненням. Так повертається контроль і зменшується біль.
+<br><b>Мікро-крок:</b> зроби «достатньо добре» (80%) в одній задачі.` },
+  { key:"distance", name:"Дистанція / Відсікти, щоб не бути вразливою", wow:`Коли відчувається холод або несправедливість, може піднятися внутрішня крига: ти віддаляєшся, інколи з знеціненням. Так повертається контроль і зменшується біль.
 <br><br><b>Приклади:</b> «це не ті люди»; «мені й не треба».
 <br><br><b>Сильна сторона:</b> сильні межі.
 <br><b>Ризик:</b> різкість і самотність.
-<br><b>Мікро-крок:</b> 1 уточнення замість відсічі: «Я правильно зрозуміла, що…?».`
-  },
-  {
-    key:"adapt",
-    name:"Адаптація / Бути зручною, щоб зберегти мир",
-    wow: `Ти чутлива до напруги і часто підлаштовуєшся, щоб не розгойдувати ситуацію. Це твій спосіб тримати систему стабільною.
+<br><b>Мікро-крок:</b> 1 уточнення замість відсічі: «Я правильно зрозуміла, що…?».` },
+  { key:"adapt", name:"Адаптація / Бути зручною, щоб зберегти мир", wow:`Ти чутлива до напруги і часто підлаштовуєшся, щоб не розгойдувати ситуацію. Це твій спосіб тримати систему стабільною.
 <br><br><b>Приклади:</b> згладжуєш конфлікт; стаєш «простішою», щоб тебе не відсунули.
 <br><br><b>Сильна сторона:</b> дипломатія і соціальний інтелект.
 <br><b>Ризик:</b> зрада себе і накопичена злість.
-<br><b>Мікро-крок:</b> одна маленька межа: «Мені так не підходить, давай інакше».`
-  },
-  {
-    key:"resource",
-    name:"Ресурс / Збалансований режим",
-    wow: `Ти вмієш бути в собі: відчувати, думати і діяти без крайнощів. Ти можеш і тримати межі, і залишатися в контакті.
+<br><b>Мікро-крок:</b> одна маленька межа: «Мені так не підходить, давай інакше».` },
+  { key:"resource", name:"Ресурс / Збалансований режим", wow:`Ти вмієш бути в собі: відчувати, думати і діяти без крайнощів. Ти можеш і тримати межі, і залишатися в контакті.
 <br><br><b>Приклади:</b> не зникаєш, але й не доводиш «на силі»; говориш прямо без атаки.
 <br><br><b>Сильна сторона:</b> внутрішня опора.
 <br><b>Ризик:</b> рідко — «перетримати» інших у сильній емоції.
-<br><b>Мікро-крок:</b> зафіксуй, що дає ресурс (сон/тіло/люди/сенс) і повторюй це.`
-  },
+<br><b>Мікро-крок:</b> зафіксуй, що дає ресурс (сон/тіло/люди/сенс) і повторюй це.` },
 ];
 
 /** =========================
  *  QUESTIONS (20)
- *  Each option maps to strategy key.
- *  NOTE: mapping is a best-practice logical mapping.
  *  ========================= */
 const QUESTIONS = [
   {
@@ -754,14 +730,16 @@ const views = {
   daily: document.getElementById("viewDaily"),
   dynamics: document.getElementById("viewDynamics"),
 };
+const statusPill = document.getElementById("statusPill");
+let currentTab = "test";
+
 function setTab(name){
+  currentTab = name;
   tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
   Object.entries(views).forEach(([k,el]) => el.style.display = (k===name ? "block" : "none"));
-  renderAll(); // keep in sync
+  renderActiveTab();
 }
 tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
-
-const statusPill = document.getElementById("statusPill");
 
 /** =========================
  *  HELPERS
@@ -773,15 +751,12 @@ function fmtDate(d){
   return `${yyyy}-${mm}-${dd}`;
 }
 function todayKey(){ return fmtDate(new Date()); }
-
 function strategyByKey(k){ return STRATEGIES.find(s=>s.key===k); }
 
 function computeResult(answers){
-  // scores per strategy
   const scores = {};
   STRATEGIES.forEach(s => scores[s.key]=0);
 
-  // count each selected option as +1 for mapped strategy
   QUESTIONS.forEach(q=>{
     const pick = answers[q.id];
     if(!pick) return;
@@ -790,17 +765,12 @@ function computeResult(answers){
     scores[opt.s] += 1;
   });
 
-  // choose top strategy
   let bestKey = STRATEGIES[0].key;
   let bestVal = -1;
   for(const [k,v] of Object.entries(scores)){
     if(v>bestVal){ bestVal=v; bestKey=k; }
   }
 
-  // If tie, keep first by strategy order
-  const best = strategyByKey(bestKey);
-
-  // Secondary: top2
   const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
   const top2 = sorted.slice(0,2).map(([k,v])=>({key:k, val:v, name:strategyByKey(k).name}));
 
@@ -809,7 +779,6 @@ function computeResult(answers){
 
 function dailyInsight(modeKey, stress){
   const s = Number(stress||0);
-  // short micro-insights: mode + stress threshold
   const high = s >= 7;
   const mid = s >= 4 && s <= 6;
 
@@ -863,17 +832,34 @@ function dailyInsight(modeKey, stress){
 }
 
 /** =========================
- *  RENDER: TEST
+ *  STATUS + PROGRESS
  *  ========================= */
-function renderTest(){
-  const state = loadState();
-  const answers = state.answers || {};
+function updateStatusPill(){
+  const st = loadState();
   const total = QUESTIONS.length;
-  const answered = Object.keys(answers).length;
+  const answered = Object.keys(st.answers||{}).length;
 
   statusPill.textContent = answered === total
     ? "Тест заповнений ✅"
     : `Заповнено: ${answered}/${total}`;
+}
+
+function getProgress(){
+  const st = loadState();
+  const total = QUESTIONS.length;
+  const answered = Object.keys(st.answers||{}).length;
+  const pct = Math.round((answered/total)*100);
+  return { answered, total, pct };
+}
+
+/** =========================
+ *  RENDER: TEST
+ *  ========================= */
+function renderTest(){
+  updateStatusPill();
+  const st = loadState();
+  const answers = st.answers || {};
+  const { answered, total, pct } = getProgress();
 
   let html = `
     <div class="row">
@@ -883,6 +869,20 @@ function renderTest(){
           Обирай <b>найближчу</b> відповідь. Тут немає «правильно/неправильно».
           Твоя мета — побачити свою <b>автоматичну</b> стратегію.
         </p>
+
+        <div class="progressWrap">
+          <div class="progressTop">
+            <span class="pill">Відповідей: <b id="answeredCount">${answered}</b> / ${total}</span>
+            <span class="pill"><b id="answeredPct">${pct}%</b></span>
+          </div>
+          <div class="progressTrack">
+            <div class="progressFill" id="progressFill" style="width:${pct}%"></div>
+          </div>
+          <p class="mini" style="margin:8px 0 0">
+            Після вибору відповіді додаток автоматично підведе до наступного питання.
+          </p>
+        </div>
+
         <div class="actions">
           <button class="btnGhost" id="btnGoDaily">Перейти до “Щодня”</button>
           <button class="btnDanger" id="btnReset">Скинути відповіді</button>
@@ -896,12 +896,19 @@ function renderTest(){
         <div class="resultBox">
           <p class="mini" style="margin:0 0 6px">Швидкий статус</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <span class="pill">Відповідей: <b>${answered}</b> / ${total}</span>
             <span class="pill">Free: історія <b>7 днів</b></span>
+            <span class="pill">Автозбереження ✅</span>
           </div>
           <p class="hint" style="margin-top:10px">
             Після тесту додаток дає результат і починається “живе” використання: щоденні check-in + динаміка.
           </p>
+
+          <div style="margin-top:12px">
+            <button class="btnPrimary" id="btnCalcTop" ${answered===total ? "" : "disabled"}>Порахувати результат</button>
+            <p class="mini" style="margin:8px 0 0">
+              ${answered===total ? "Готово — можна рахувати ✅" : "Кнопка активується, коли буде 20/20."}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -910,7 +917,7 @@ function renderTest(){
   QUESTIONS.forEach(q=>{
     html += `
       <div class="q" data-qid="${q.id}">
-       <h3><span class="qnum">${q.id}</span> ${q.text}</h3>
+        <h3><span class="qnum">${q.id}</span> ${q.text}</h3>
         <div class="opts">
           ${q.options.map(o=>{
             const selected = answers[q.id] === o.k ? "selected" : "";
@@ -925,29 +932,29 @@ function renderTest(){
       </div>
     `;
   });
-    html += `
+
+  html += `
     <div style="text-align:center; margin-top:24px;">
-      <button class="btnPrimary" id="btnCalc">Порахувати результат</button>
+      <button class="btnPrimary" id="btnCalcBottom" ${answered===total ? "" : "disabled"}>Порахувати результат</button>
+      <p class="mini" style="margin:10px 0 0">Кнопка дублюється зверху і знизу, щоб не шукати.</p>
     </div>
   `;
 
   views.test.innerHTML = html;
 
-  // bind option clicks
-  views.test.querySelectorAll(".opt").forEach(el=>{
-    el.addEventListener("click", ()=>{
-      const qid = Number(el.dataset.qid);
-      const opt = el.dataset.opt;
-      const st = loadState();
-      st.answers = st.answers || {};
-      st.answers[qid] = opt;
-      saveState(st);
-      renderAll();
-    });
-  });
+  // handlers
+  document.getElementById("btnGoDaily").onclick = ()=> setTab("daily");
 
-  // buttons
-  document.getElementById("btnCalc").onclick = ()=>{
+  document.getElementById("btnReset").onclick = ()=>{
+    if(!confirm("Скинути відповіді тесту?")) return;
+    const st = loadState();
+    st.answers = {};
+    st.lastResult = null;
+    saveState(st);
+    renderTest(); // тільки тест
+  };
+
+  const calc = ()=>{
     const st = loadState();
     const answeredNow = Object.keys(st.answers||{}).length;
     if(answeredNow < QUESTIONS.length){
@@ -958,23 +965,65 @@ function renderTest(){
     saveState(st);
     setTab("result");
   };
+  document.getElementById("btnCalcTop").onclick = calc;
+  document.getElementById("btnCalcBottom").onclick = calc;
 
-  document.getElementById("btnGoDaily").onclick = ()=> setTab("daily");
+  // ✅ Event delegation: не перерендерюємо весь тест при кожному кліку
+  views.test.addEventListener("click", (e)=>{
+    const optEl = e.target.closest(".opt");
+    if(!optEl) return;
 
-  document.getElementById("btnReset").onclick = ()=>{
-    if(!confirm("Скинути відповіді тесту?")) return;
+    const qid = Number(optEl.dataset.qid);
+    const opt = optEl.dataset.opt;
+
     const st = loadState();
-    st.answers = {};
-    st.lastResult = null;
+    st.answers = st.answers || {};
+    st.answers[qid] = opt;
     saveState(st);
-    renderAll();
-  };
+
+    // update UI locally (only this question)
+    const qBlock = views.test.querySelector(`.q[data-qid="${qid}"]`);
+    if(qBlock){
+      qBlock.querySelectorAll(".opt").forEach(x=>x.classList.remove("selected"));
+      optEl.classList.add("selected");
+    }
+
+    // update progress + status + buttons
+    const { answered, total, pct } = getProgress();
+    const answeredCount = document.getElementById("answeredCount");
+    const answeredPct = document.getElementById("answeredPct");
+    const progressFill = document.getElementById("progressFill");
+    if(answeredCount) answeredCount.textContent = answered;
+    if(answeredPct) answeredPct.textContent = `${pct}%`;
+    if(progressFill) progressFill.style.width = `${pct}%`;
+
+    updateStatusPill();
+
+    const enable = answered === total;
+    const btnTop = document.getElementById("btnCalcTop");
+    const btnBottom = document.getElementById("btnCalcBottom");
+    if(btnTop) btnTop.disabled = !enable;
+    if(btnBottom) btnBottom.disabled = !enable;
+
+    // ✅ Autoscroll to next question (smooth)
+    const nextQ = views.test.querySelector(`.q[data-qid="${qid+1}"]`);
+    if(nextQ){
+      nextQ.scrollIntoView({ behavior:"smooth", block:"start" });
+    }else{
+      // last question -> gently hint to calc button
+      const bottomBtn = document.getElementById("btnCalcBottom");
+      if(bottomBtn && enable){
+        bottomBtn.scrollIntoView({ behavior:"smooth", block:"center" });
+      }
+    }
+  }, { passive:true });
 }
 
 /** =========================
  *  RENDER: RESULT
  *  ========================= */
 function renderResult(){
+  updateStatusPill();
   const state = loadState();
   const r = state.lastResult;
 
@@ -983,16 +1032,16 @@ function renderResult(){
       <h2 class="title">Результат</h2>
       <p class="hint">Спочатку заповни тест (20 питань) і натисни “Порахувати результат”.</p>
       <div class="actions">
-        <button class="btnPrimary" onclick="(${setTab.toString()})('test')">Повернутися до тесту</button>
+        <button class="btnPrimary" id="btnBackToTestFromEmpty">Повернутися до тесту</button>
       </div>
     `;
+    document.getElementById("btnBackToTestFromEmpty").onclick = ()=> setTab("test");
     return;
   }
 
   const best = strategyByKey(r.bestKey);
   const top2 = r.top2 || [];
 
-  // score list (compact)
   const scoreList = STRATEGIES
     .map(s=>({name:s.name, key:s.key, val: r.scores[s.key]||0}))
     .sort((a,b)=>b.val-a.val);
@@ -1052,6 +1101,7 @@ function renderResult(){
  *  RENDER: DAILY
  *  ========================= */
 function renderDaily(){
+  updateStatusPill();
   const state = loadState();
   const today = todayKey();
   const existing = (state.daily||[]).find(e=>e.date===today);
@@ -1116,7 +1166,6 @@ function renderDaily(){
     </div>
   `;
 
-  // bind mode clicks
   views.daily.querySelectorAll("[data-mode]").forEach(el=>{
     el.addEventListener("click", ()=>{
       views.daily.querySelectorAll("[data-mode]").forEach(x=>x.classList.remove("selected"));
@@ -1128,7 +1177,6 @@ function renderDaily(){
       entry.modeKey = mk;
       saveState(st);
 
-      // update insight
       const stressV = Number(document.getElementById("stress").value);
       document.getElementById("insightText").textContent = dailyInsight(mk, stressV);
       const modeName = strategyByKey(mk)?.name || mk;
@@ -1136,7 +1184,6 @@ function renderDaily(){
     });
   });
 
-  // stress live update
   const stressEl = document.getElementById("stress");
   stressEl.addEventListener("input", ()=>{
     document.getElementById("stressVal").textContent = stressEl.value;
@@ -1149,7 +1196,6 @@ function renderDaily(){
     if(mk) document.getElementById("insightText").textContent = dailyInsight(mk, stressEl.value);
   });
 
-  // trigger
   const trigEl = document.getElementById("trigger");
   trigEl.addEventListener("input", ()=>{
     const st = loadState();
@@ -1158,26 +1204,22 @@ function renderDaily(){
     saveState(st);
   });
 
-  // save
   document.getElementById("btnSaveDaily").onclick = ()=>{
     const st = loadState();
     const entry = getOrCreateToday(st, today);
-    // make sure fields saved
     entry.stress = Number(document.getElementById("stress").value);
     entry.trigger = document.getElementById("trigger").value;
 
-    // validate
     if(!entry.modeKey){
       alert("Обери, будь ласка, режим дня 🙂");
       return;
     }
 
-    // keep only last 7 days
     st.daily = trimTo7Days(st.daily || []);
     saveState(st);
 
     statusPill.textContent = "Збережено ✅";
-    setTimeout(()=>renderAll(), 50);
+    // не перерендерюємо все, тільки оновлюємо статус
   };
 
   document.getElementById("btnGoDyn").onclick = ()=> setTab("dynamics");
@@ -1194,7 +1236,6 @@ function getOrCreateToday(st, today){
 }
 
 function trimTo7Days(arr){
-  // keep entries within last 7 days inclusive
   const now = new Date();
   const cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
   return arr
@@ -1206,16 +1247,15 @@ function trimTo7Days(arr){
 }
 
 /** =========================
- *  RENDER: DYNAMICS (7 days)
+ *  RENDER: DYNAMICS
  *  ========================= */
 function renderDynamics(){
+  updateStatusPill();
   const st = loadState();
   const daily = trimTo7Days(st.daily || []);
-  // ensure state trimmed
   st.daily = daily;
   saveState(st);
 
-  // Prepare 7-day array including missing days
   const days = [];
   const now = new Date();
   for(let i=6;i>=0;i--){
@@ -1225,7 +1265,6 @@ function renderDynamics(){
     days.push({ date:key, entry });
   }
 
-  // counts by mode
   const counts = {};
   DAILY_MODES.forEach(m=>counts[m.key]=0);
   days.forEach(d=>{
@@ -1295,7 +1334,6 @@ function renderDynamics(){
     </div>
   `;
 
-  // draw chart
   drawChart(days);
 
   document.getElementById("btnGoDaily2").onclick = ()=> setTab("daily");
@@ -1305,7 +1343,7 @@ function renderDynamics(){
     const s = loadState();
     s.daily = [];
     saveState(s);
-    renderAll();
+    renderDynamics();
   };
 }
 
@@ -1314,15 +1352,12 @@ function drawChart(days){
   if(!c) return;
   const ctx = c.getContext("2d");
 
-  // clear
   ctx.clearRect(0,0,c.width,c.height);
 
-  // padding
   const padL=48, padR=18, padT=18, padB=36;
   const W = c.width - padL - padR;
   const H = c.height - padT - padB;
 
-  // background grid
   ctx.globalAlpha = 1;
   ctx.strokeStyle = "rgba(27,21,48,.10)";
   ctx.lineWidth = 1;
@@ -1339,14 +1374,12 @@ function drawChart(days){
     ctx.fillText(String(i), 14, y+4);
   }
 
-  // points
   const vals = days.map(d => (d.entry ? Number(d.entry.stress) : null));
   const xs = days.map((_,i)=> padL + (W * i/(days.length-1)));
   const ys = vals.map(v => (v===null ? null : padT + H * (1 - v/10)));
 
-  // line
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgba(205,183,255,.95)"; // violet line
+  ctx.strokeStyle = "rgba(205,183,255,.95)";
   ctx.beginPath();
   let started=false;
   for(let i=0;i<days.length;i++){
@@ -1356,7 +1389,6 @@ function drawChart(days){
   }
   ctx.stroke();
 
-  // points dots (gold)
   for(let i=0;i<days.length;i++){
     if(ys[i]===null) continue;
     ctx.beginPath();
@@ -1368,23 +1400,22 @@ function drawChart(days){
     ctx.stroke();
   }
 
-  // x labels
   ctx.fillStyle = "rgba(107,93,134,.95)";
   ctx.font = "12px ui-sans-serif";
   for(let i=0;i<days.length;i++){
-    const dd = days[i].date.slice(5); // MM-DD
+    const dd = days[i].date.slice(5);
     ctx.fillText(dd, xs[i]-18, padT+H+24);
   }
 }
 
 /** =========================
- *  RENDER ALL
+ *  RENDER ACTIVE TAB ONLY
  *  ========================= */
-function renderAll(){
-  renderTest();
-  renderResult();
-  renderDaily();
-  renderDynamics();
+function renderActiveTab(){
+  if(currentTab === "test") return renderTest();
+  if(currentTab === "result") return renderResult();
+  if(currentTab === "daily") return renderDaily();
+  if(currentTab === "dynamics") return renderDynamics();
 }
 
 /** =========================
@@ -1399,8 +1430,9 @@ function escapeHtml(s){
     .replaceAll("'","&#039;");
 }
 
-// initial
-renderAll();
+// init
+updateStatusPill();
+renderActiveTab();
 </script>
 </body>
 </html>
